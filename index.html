@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>Дима Билан — Я просто люблю тебя</title>
+    <title>Виктор Салтыков — Я просто люблю тебя</title>
     <style>
         * {
             margin: 0;
@@ -13,62 +13,62 @@
 
         body {
             min-height: 100vh;
-            background: linear-gradient(145deg, #2a2520 0%, #1a1612 100%);
+            background: linear-gradient(145deg, #1f2a2a 0%, #121a1a 100%);
             font-family: 'Segoe UI', 'Georgia', 'Times New Roman', serif;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 16px;
-            color: #f0e2c5;
+            color: #e8e0c8;
         }
 
         .player-card {
             max-width: 560px;
             width: 100%;
-            background: rgba(30, 25, 20, 0.88);
+            background: rgba(25, 35, 35, 0.88);
             backdrop-filter: blur(12px);
             border-radius: 56px;
             padding: 1.8rem 1.4rem 2.2rem;
-            box-shadow: 0 30px 45px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 235, 200, 0.1);
+            box-shadow: 0 30px 45px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(200, 220, 180, 0.1);
             text-align: center;
-            border: 1px solid rgba(220, 190, 140, 0.5);
+            border: 1px solid rgba(160, 190, 140, 0.4);
         }
 
         .dedication {
             font-size: clamp(0.85rem, 4vw, 1.1rem);
             font-family: 'Georgia', serif;
             letter-spacing: 1px;
-            color: #f5dcb0;
-            background: rgba(0, 0, 0, 0.4);
+            color: #cfebb0;
+            background: rgba(0, 0, 0, 0.45);
             display: inline-block;
             padding: 6px 20px;
             border-radius: 50px;
             margin-bottom: 16px;
             font-style: italic;
-            border: 0.5px solid #e2bc7c;
+            border: 0.5px solid #a8c882;
         }
 
         .song-title {
-            font-size: clamp(1.6rem, 7vw, 3rem);
+            font-size: clamp(1.5rem, 7vw, 2.9rem);
             font-weight: 700;
             font-family: 'Georgia', serif;
             letter-spacing: 1px;
-            background: linear-gradient(135deg, #ffe6c4, #e7c690, #ffe0b5);
+            background: linear-gradient(135deg, #e6f0d8, #c8e0a8, #e2f0cc);
             background-clip: text;
             -webkit-background-clip: text;
             color: transparent;
             margin-bottom: 0.3rem;
             text-shadow: 0 2px 4px rgba(0,0,0,0.3);
             word-break: break-word;
-            line-height: 1.2;
+            line-height: 1.25;
         }
         
         .artist {
             font-size: 0.95rem;
             font-family: monospace;
             letter-spacing: 2px;
-            color: #d4be8a;
-            border-top: 1px dashed #b69452;
+            color: #bbda96;
+            border-top: 1px dashed #8fb06a;
             display: inline-block;
             padding-top: 8px;
             margin-bottom: 16px;
@@ -86,7 +86,7 @@
         }
 
         .listen-btn {
-            background: radial-gradient(ellipse at 30% 35%, #c4975a, #8c6738);
+            background: radial-gradient(ellipse at 30% 35%, #6f8f4a, #4a6330);
             border: none;
             width: 92%;
             max-width: 300px;
@@ -96,11 +96,11 @@
             font-size: clamp(1.3rem, 6vw, 1.9rem);
             font-weight: bold;
             font-family: 'Segoe UI', 'Georgia', serif;
-            color: #fff8ea;
+            color: #fffef5;
             text-transform: uppercase;
             border-radius: 60px;
             cursor: pointer;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 220, 150, 0.6);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(210, 240, 150, 0.5);
             transition: transform 0.08s linear, box-shadow 0.15s;
             letter-spacing: 2px;
         }
@@ -111,9 +111,9 @@
         }
 
         .listen-btn.playing {
-            background: radial-gradient(ellipse at 30% 35%, #e0aa64, #aa7a3e);
-            box-shadow: 0 0 22px #ffcf7a, 0 6px 18px black;
-            text-shadow: 0 0 4px #ffefc0;
+            background: radial-gradient(ellipse at 30% 35%, #8bb35c, #5e803a);
+            box-shadow: 0 0 22px #bce87a, 0 6px 18px black;
+            text-shadow: 0 0 4px #fbffcf;
         }
 
         .loader-container {
@@ -124,7 +124,7 @@
         .progress-bar {
             width: 100%;
             height: 4px;
-            background: rgba(255,255,200,0.25);
+            background: rgba(200, 230, 150, 0.25);
             border-radius: 10px;
             overflow: hidden;
             margin: 6px 0;
@@ -132,19 +132,19 @@
         .progress-fill {
             width: 0%;
             height: 100%;
-            background: linear-gradient(90deg, #e7bc7e, #ffdd99);
+            background: linear-gradient(90deg, #b8da7a, #e2ffa8);
             border-radius: 10px;
             transition: width 0.2s;
         }
         .loading-text {
             font-size: 0.7rem;
             font-family: monospace;
-            color: #ccb68a;
+            color: #cce0aa;
         }
 
         .status {
             font-size: 0.9rem;
-            background: #1e1912b3;
+            background: #1e241ab3;
             display: inline-block;
             padding: 6px 18px;
             border-radius: 50px;
@@ -152,7 +152,7 @@
             margin-top: 8px;
             font-weight: 500;
             font-style: italic;
-            color: #eedbaa;
+            color: #dbecb8;
             font-family: 'Georgia', serif;
             max-width: 95%;
             word-break: break-word;
@@ -160,18 +160,18 @@
 
         .download-area {
             margin-top: 28px;
-            border-top: 1px dashed rgba(200, 165, 100, 0.6);
+            border-top: 1px dashed rgba(150, 180, 110, 0.6);
             padding-top: 20px;
         }
 
         .download-btn {
-            background: #29211ad9;
-            border: 1px solid #bf9e6b;
+            background: #252e1ed9;
+            border: 1px solid #9cbd6b;
             padding: 10px 22px;
             font-size: 1rem;
             font-weight: 500;
             border-radius: 60px;
-            color: #ffe3b8;
+            color: #e5ffbc;
             cursor: pointer;
             display: inline-flex;
             align-items: center;
@@ -183,9 +183,9 @@
         }
 
         .download-btn:hover {
-            background: #3e2d20;
-            border-color: #e7bd7a;
-            color: #fff0cf;
+            background: #3a4a2a;
+            border-color: #c0ea82;
+            color: #f6ffda;
             gap: 15px;
         }
 
@@ -196,7 +196,7 @@
         .footer-meta {
             margin-top: 16px;
             font-size: 0.65rem;
-            opacity: 0.55;
+            opacity: 0.6;
             display: flex;
             justify-content: center;
             gap: 16px;
@@ -214,7 +214,7 @@
         }
 
         @media (max-width: 380px) {
-            .song-title { font-size: 1.6rem; }
+            .song-title { font-size: 1.4rem; }
             .listen-btn { font-size: 1.2rem; padding: 12px 10px; }
         }
 
@@ -224,11 +224,11 @@
 <body>
 
 <div class="player-card">
-    <div class="dedication">💖 Песня для Елены Михайловны 💖</div>
+    <div class="dedication">🌿 Песня для Елены Михайловны 🌿</div>
     <div class="song-title">Я просто люблю тебя</div>
-    <div class="artist">Дима Билан</div>
+    <div class="artist">Виктор Салтыков</div>
     <div class="romance-icons">
-        <span>💕</span> <span>🌹</span> <span>🎤</span> <span>💫</span> <span>💖</span>
+        <span>💚</span> <span>🌾</span> <span>🎸</span> <span>💫</span> <span>💚</span>
     </div>
 
     <button class="listen-btn" id="listenBigBtn">СЛУШАТЬ ▶</button>
@@ -246,19 +246,19 @@
         <button class="download-btn" id="downloadFileBtn">⬇️ СКАЧАТЬ (MP3)</button>
         <div class="footer-meta">
             <span>🎶 Поп · Баллада</span>
-            <span>💗 О любви</span>
+            <span>💚 О любви</span>
         </div>
     </div>
 </div>
 
-<audio id="bilanaudio" preload="auto"></audio>
+<audio id="saltykovAudio" preload="auto"></audio>
 
 <script>
     (function() {
-        // ТОЧНАЯ ССЫЛКА НА ТВОЙ MP3 ФАЙЛ
-        const RAW_MP3 = 'https://raw.githubusercontent.com/BtheBFr/lublu/main/audio/Dima_Bilan_-_YA_prosto_lyublyu_tebya_48051515.mp3';
+        // ТОЧНАЯ ССЫЛКА НА ТВОЙ MP3 (Виктор Салтыков)
+        const RAW_MP3 = 'https://raw.githubusercontent.com/BtheBFr/lublu/main/audio/Viktor_Saltykov_-_YA_prosto_lyublyu_tebya_73718249.mp3';
         
-        const audioElem = document.getElementById('bilanaudio');
+        const audioElem = document.getElementById('saltykovAudio');
         const listenBtn = document.getElementById('listenBigBtn');
         const statusSpan = document.getElementById('playerStatus');
         const downloadBtn = document.getElementById('downloadFileBtn');
@@ -273,9 +273,9 @@
             if (isPlayingFlag) {
                 listenBtn.classList.add('playing');
                 listenBtn.innerHTML = '⏸ ПАУЗА';
-                statusSpan.innerHTML = '💗 Дима Билан — Я просто люблю тебя';
+                statusSpan.innerHTML = '💚 Виктор Салтыков — Я просто люблю тебя';
                 statusSpan.style.fontWeight = 'bold';
-                statusSpan.style.color = '#ffe3a3';
+                statusSpan.style.color = '#e2ffb0';
                 statusSpan.style.fontStyle = 'normal';
             } else {
                 listenBtn.classList.remove('playing');
@@ -284,12 +284,11 @@
                     statusSpan.innerHTML = '🎵 Нажми «Слушать»';
                 }
                 statusSpan.style.fontWeight = 'normal';
-                statusSpan.style.color = '#eedbaa';
+                statusSpan.style.color = '#dbecb8';
                 statusSpan.style.fontStyle = 'italic';
             }
         }
 
-        // Загрузка с прогрессом
         function loadWithProgress(url, onProgress, onComplete) {
             const xhr = new XMLHttpRequest();
             xhr.open('GET', url, true);
@@ -392,7 +391,7 @@
         function downloadFile() {
             const link = document.createElement('a');
             link.href = RAW_MP3;
-            link.download = 'Dima_Bilan_YA_prosto_lyublyu_tebya.mp3';
+            link.download = 'Viktor_Saltykov_YA_prosto_lyublyu_tebya.mp3';
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
@@ -401,7 +400,7 @@
             statusSpan.innerHTML = '⬇️ Скачивание...';
             setTimeout(() => {
                 if (!isPlayingFlag) statusSpan.innerHTML = originalStatus;
-                else statusSpan.innerHTML = '💗 Дима Билан — Я просто люблю тебя';
+                else statusSpan.innerHTML = '💚 Виктор Салтыков — Я просто люблю тебя';
             }, 1500);
         }
 
