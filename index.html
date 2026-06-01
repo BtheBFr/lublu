@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>Дима Билан — Я просто люблю тебя</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(145deg, #2a2520 0%, #1a1612 100%);
+            font-family: 'Segoe UI', 'Georgia', 'Times New Roman', serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            color: #f0e2c5;
+        }
+
+        .player-card {
+            max-width: 560px;
+            width: 100%;
+            background: rgba(30, 25, 20, 0.88);
+            backdrop-filter: blur(12px);
+            border-radius: 56px;
+            padding: 1.8rem 1.4rem 2.2rem;
+            box-shadow: 0 30px 45px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 235, 200, 0.1);
+            text-align: center;
+            border: 1px solid rgba(220, 190, 140, 0.5);
+        }
+
+        .dedication {
+            font-size: clamp(0.85rem, 4vw, 1.1rem);
+            font-family: 'Georgia', serif;
+            letter-spacing: 1px;
+            color: #f5dcb0;
+            background: rgba(0, 0, 0, 0.4);
+            display: inline-block;
+            padding: 6px 20px;
+            border-radius: 50px;
+            margin-bottom: 16px;
+            font-style: italic;
+            border: 0.5px solid #e2bc7c;
+        }
+
+        .song-title {
+            font-size: clamp(1.6rem, 7vw, 3rem);
+            font-weight: 700;
+            font-family: 'Georgia', serif;
+            letter-spacing: 1px;
+            background: linear-gradient(135deg, #ffe6c4, #e7c690, #ffe0b5);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 0.3rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            word-break: break-word;
+            line-height: 1.2;
+        }
+        
+        .artist {
+            font-size: 0.95rem;
+            font-family: monospace;
+            letter-spacing: 2px;
+            color: #d4be8a;
+            border-top: 1px dashed #b69452;
+            display: inline-block;
+            padding-top: 8px;
+            margin-bottom: 16px;
+            font-weight: 500;
+        }
+
+        .romance-icons {
+            display: flex;
+            justify-content: center;
+            gap: 18px;
+            margin: 12px 0 16px;
+            font-size: 1.6rem;
+            opacity: 0.8;
+            flex-wrap: wrap;
+        }
+
+        .listen-btn {
+            background: radial-gradient(ellipse at 30% 35%, #c4975a, #8c6738);
+            border: none;
+            width: 92%;
+            max-width: 300px;
+            padding: 18px 16px;
+            margin: 10px auto 12px;
+            display: block;
+            font-size: clamp(1.3rem, 6vw, 1.9rem);
+            font-weight: bold;
+            font-family: 'Segoe UI', 'Georgia', serif;
+            color: #fff8ea;
+            text-transform: uppercase;
+            border-radius: 60px;
+            cursor: pointer;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 220, 150, 0.6);
+            transition: transform 0.08s linear, box-shadow 0.15s;
+            letter-spacing: 2px;
+        }
+
+        .listen-btn:active {
+            transform: scale(0.97);
+            box-shadow: 0 5px 12px black;
+        }
+
+        .listen-btn.playing {
+            background: radial-gradient(ellipse at 30% 35%, #e0aa64, #aa7a3e);
+            box-shadow: 0 0 22px #ffcf7a, 0 6px 18px black;
+            text-shadow: 0 0 4px #ffefc0;
+        }
+
+        .loader-container {
+            margin: 8px auto 0;
+            width: 85%;
+            max-width: 260px;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: rgba(255,255,200,0.25);
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 6px 0;
+        }
+        .progress-fill {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #e7bc7e, #ffdd99);
+            border-radius: 10px;
+            transition: width 0.2s;
+        }
+        .loading-text {
+            font-size: 0.7rem;
+            font-family: monospace;
+            color: #ccb68a;
+        }
+
+        .status {
+            font-size: 0.9rem;
+            background: #1e1912b3;
+            display: inline-block;
+            padding: 6px 18px;
+            border-radius: 50px;
+            backdrop-filter: blur(4px);
+            margin-top: 8px;
+            font-weight: 500;
+            font-style: italic;
+            color: #eedbaa;
+            font-family: 'Georgia', serif;
+            max-width: 95%;
+            word-break: break-word;
+        }
+
+        .download-area {
+            margin-top: 28px;
+            border-top: 1px dashed rgba(200, 165, 100, 0.6);
+            padding-top: 20px;
+        }
+
+        .download-btn {
+            background: #29211ad9;
+            border: 1px solid #bf9e6b;
+            padding: 10px 22px;
+            font-size: 1rem;
+            font-weight: 500;
+            border-radius: 60px;
+            color: #ffe3b8;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: 0.2s;
+            backdrop-filter: blur(5px);
+            font-family: monospace;
+            letter-spacing: 1px;
+        }
+
+        .download-btn:hover {
+            background: #3e2d20;
+            border-color: #e7bd7a;
+            color: #fff0cf;
+            gap: 15px;
+        }
+
+        .download-btn:active {
+            transform: scale(0.96);
+        }
+
+        .footer-meta {
+            margin-top: 16px;
+            font-size: 0.65rem;
+            opacity: 0.55;
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 550px) {
+            body { padding: 12px; }
+            .player-card { padding: 1.2rem 1rem 1.6rem; border-radius: 40px; }
+            .listen-btn { width: 100%; padding: 15px 12px; font-size: 1.4rem; }
+            .download-btn { padding: 8px 16px; font-size: 0.9rem; }
+            .status { font-size: 0.8rem; padding: 5px 12px; }
+            .romance-icons { font-size: 1.3rem; gap: 12px; }
+            .dedication { font-size: 0.75rem; padding: 4px 14px; }
+        }
+
+        @media (max-width: 380px) {
+            .song-title { font-size: 1.6rem; }
+            .listen-btn { font-size: 1.2rem; padding: 12px 10px; }
+        }
+
+        audio { display: none; }
+    </style>
+</head>
+<body>
+
+<div class="player-card">
+    <div class="dedication">💖 Песня для Елены Михайловны 💖</div>
+    <div class="song-title">Я просто люблю тебя</div>
+    <div class="artist">Дима Билан</div>
+    <div class="romance-icons">
+        <span>💕</span> <span>🌹</span> <span>🎤</span> <span>💫</span> <span>💖</span>
+    </div>
+
+    <button class="listen-btn" id="listenBigBtn">СЛУШАТЬ ▶</button>
+    
+    <div class="loader-container" id="loaderContainer" style="display: none;">
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="loading-text" id="loadingText">⏳ Загрузка трека... 0%</div>
+    </div>
+
+    <div class="status" id="playerStatus">🎵 Нажми «Слушать»</div>
+
+    <div class="download-area">
+        <button class="download-btn" id="downloadFileBtn">⬇️ СКАЧАТЬ (MP3)</button>
+        <div class="footer-meta">
+            <span>🎶 Поп · Баллада</span>
+            <span>💗 О любви</span>
+        </div>
+    </div>
+</div>
+
+<audio id="bilanaudio" preload="auto"></audio>
+
+<script>
+    (function() {
+        // ТОЧНАЯ ССЫЛКА НА ТВОЙ MP3 ФАЙЛ
+        const RAW_MP3 = 'https://raw.githubusercontent.com/BtheBFr/lublu/main/audio/Dima_Bilan_-_YA_prosto_lyublyu_tebya_48051515.mp3';
+        
+        const audioElem = document.getElementById('bilanaudio');
+        const listenBtn = document.getElementById('listenBigBtn');
+        const statusSpan = document.getElementById('playerStatus');
+        const downloadBtn = document.getElementById('downloadFileBtn');
+        const loaderContainer = document.getElementById('loaderContainer');
+        const progressFill = document.getElementById('progressFill');
+        const loadingText = document.getElementById('loadingText');
+
+        let isPlayingFlag = false;
+        let isDownloadingFlag = false;
+
+        function updateUI() {
+            if (isPlayingFlag) {
+                listenBtn.classList.add('playing');
+                listenBtn.innerHTML = '⏸ ПАУЗА';
+                statusSpan.innerHTML = '💗 Дима Билан — Я просто люблю тебя';
+                statusSpan.style.fontWeight = 'bold';
+                statusSpan.style.color = '#ffe3a3';
+                statusSpan.style.fontStyle = 'normal';
+            } else {
+                listenBtn.classList.remove('playing');
+                listenBtn.innerHTML = 'СЛУШАТЬ ▶';
+                if (!isDownloadingFlag) {
+                    statusSpan.innerHTML = '🎵 Нажми «Слушать»';
+                }
+                statusSpan.style.fontWeight = 'normal';
+                statusSpan.style.color = '#eedbaa';
+                statusSpan.style.fontStyle = 'italic';
+            }
+        }
+
+        // Загрузка с прогрессом
+        function loadWithProgress(url, onProgress, onComplete) {
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', url, true);
+            xhr.responseType = 'blob';
+            
+            xhr.addEventListener('progress', function(event) {
+                if (event.lengthComputable) {
+                    const percent = Math.round((event.loaded / event.total) * 100);
+                    onProgress(percent, event.loaded, event.total);
+                }
+            });
+            
+            xhr.addEventListener('load', function() {
+                if (xhr.status === 200) {
+                    onComplete(xhr.response);
+                } else {
+                    console.error('Ошибка загрузки:', xhr.status);
+                    statusSpan.innerHTML = '❌ Ошибка загрузки трека';
+                    loaderContainer.style.display = 'none';
+                    isDownloadingFlag = false;
+                    updateUI();
+                }
+            });
+            
+            xhr.addEventListener('error', function() {
+                statusSpan.innerHTML = '❌ Ошибка сети';
+                loaderContainer.style.display = 'none';
+                isDownloadingFlag = false;
+                updateUI();
+            });
+            
+            xhr.send();
+        }
+
+        function startStreamingPlay() {
+            if (isDownloadingFlag) return;
+            
+            isDownloadingFlag = true;
+            loaderContainer.style.display = 'block';
+            progressFill.style.width = '0%';
+            loadingText.innerText = '⏳ Загрузка трека... 0%';
+            statusSpan.innerHTML = '📥 Загрузка...';
+            
+            loadWithProgress(RAW_MP3, 
+                function(percent, loaded, total) {
+                    progressFill.style.width = percent + '%';
+                    loadingText.innerText = `⏳ Загрузка... ${percent}% (${Math.round(loaded/1024)}/${Math.round(total/1024)} кб)`;
+                },
+                function(blob) {
+                    isDownloadingFlag = false;
+                    loaderContainer.style.display = 'none';
+                    
+                    const url = URL.createObjectURL(blob);
+                    audioElem.src = url;
+                    audioElem.loop = true;
+                    
+                    const playPromise = audioElem.play();
+                    if (playPromise !== undefined) {
+                        playPromise.then(() => {
+                            isPlayingFlag = true;
+                            updateUI();
+                        }).catch(err => {
+                            console.warn("Play заблокирован:", err);
+                            statusSpan.innerHTML = '⚠️ Нажми ещё раз (разреши звук)';
+                            isPlayingFlag = false;
+                            updateUI();
+                        });
+                    }
+                }
+            );
+        }
+
+        function togglePlay() {
+            if (audioElem.src && !isDownloadingFlag) {
+                if (isPlayingFlag) {
+                    audioElem.pause();
+                    isPlayingFlag = false;
+                    updateUI();
+                } else {
+                    const playPromise = audioElem.play();
+                    if (playPromise !== undefined) {
+                        playPromise.then(() => {
+                            isPlayingFlag = true;
+                            updateUI();
+                        }).catch(err => {
+                            console.warn("Play заблокирован:", err);
+                            statusSpan.innerHTML = '🎧 кликни ещё раз';
+                            isPlayingFlag = false;
+                            updateUI();
+                        });
+                    }
+                }
+            } else if (!isDownloadingFlag) {
+                startStreamingPlay();
+            } else {
+                statusSpan.innerHTML = '⏳ Трек загружается, подожди...';
+            }
+        }
+
+        function downloadFile() {
+            const link = document.createElement('a');
+            link.href = RAW_MP3;
+            link.download = 'Dima_Bilan_YA_prosto_lyublyu_tebya.mp3';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            const originalStatus = statusSpan.innerHTML;
+            statusSpan.innerHTML = '⬇️ Скачивание...';
+            setTimeout(() => {
+                if (!isPlayingFlag) statusSpan.innerHTML = originalStatus;
+                else statusSpan.innerHTML = '💗 Дима Билан — Я просто люблю тебя';
+            }, 1500);
+        }
+
+        listenBtn.addEventListener('click', togglePlay);
+        downloadBtn.addEventListener('click', downloadFile);
+
+        window.addEventListener('beforeunload', () => {
+            if (audioElem.src && audioElem.src.startsWith('blob:')) {
+                URL.revokeObjectURL(audioElem.src);
+            }
+        });
+    })();
+</script>
+</body>
+</html>
